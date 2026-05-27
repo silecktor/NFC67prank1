@@ -1,0 +1,134 @@
+:root {
+  color-scheme: light;
+  background: #f2f2f2;
+  color: #202124;
+  font-family: "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+}
+html,
+body {
+  margin: 0;
+  min-height: 100%;
+  background: #f2f2f2;
+  overflow: hidden;
+}
+body {
+  overscroll-behavior: none;
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  user-select: none;
+}
+.page {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  box-sizing: border-box;
+}
+.error-container {
+  width: 100%;
+  max-width: 560px;
+  text-align: center;
+}
+.icon {
+  font-size: 76px;
+  margin-bottom: 22px;
+}
+.message h1 {
+  margin: 0;
+  font-size: 48px;
+  line-height: 1.05;
+  letter-spacing: -.03em;
+}
+.message p {
+  margin: 20px auto 0;
+  max-width: 460px;
+  font-size: 16px;
+  line-height: 1.6;
+  color: #5f6368;
+}
+.error-code {
+  margin-top: 24px;
+  font-size: 14px;
+  color: #80868b;
+}
+.refresh-button {
+  margin-top: 32px;
+  min-width: 190px;
+  min-height: 44px;
+  border: none;
+  border-radius: 4px;
+  background: #1a73e8;
+  color: #fff;
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: filter .15s ease, transform .15s ease;
+}
+.refresh-button:hover,
+.refresh-button:focus {
+  filter: brightness(1.05);
+  transform: translateY(-1px);
+}
+.refresh-button:disabled {
+  opacity: .7;
+  cursor: default;
+  transform: none;
+}
+.hint {
+  margin-top: 18px;
+  font-size: 13px;
+  color: #5f6368;
+}
+.page.safari {
+  background: #f3f3f3;
+}
+.page.safari .error-container {
+  background: #fff;
+  border: 1px solid #c6c6c6;
+  border-radius: 16px;
+  padding: 34px 28px;
+  box-shadow: 0 2px 10px rgba(0,0,0,.08);
+}
+.page.safari .message h1 {
+  font-size: 44px;
+}
+.page.safari .subtitle,
+.page.safari .hint,
+.page.safari .error-code {
+  color: #6e6e73;
+}
+.page.safari .refresh-button {
+  background: #f2f2f2;
+  color: #000;
+  border: 1px solid #d2d2d7;
+  border-radius: 12px;
+}
+.page.firefox {
+  background: #f7f7f7;
+}
+.page.firefox .refresh-button {
+  background: #ff9400;
+}
+.page.yandex {
+  background: #111;
+  color: #f3f3f3;
+}
+.page.yandex .message p,
+.page.yandex .error-code,
+.page.yandex .hint {
+  color: #c7c7c7;
+}
+.page.yandex .refresh-button {
+  background: #ff0000;
+}
+.page.edge .refresh-button {
+  background: #0078d4;
+}
+.page.playing .error-container {
+  filter: saturate(0.9);
+}
+@media (max-width: 520px) {
+  .message h1 { font-size: 36px; }
+  .refresh-button { width: 100%; }
+}

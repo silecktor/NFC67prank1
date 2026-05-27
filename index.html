@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <title>Сайт недоступен</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <main class="page chrome" id="page">
+    <div class="error-container">
+      <div class="icon" id="browserIcon" aria-hidden="true">😕</div>
+      <div class="message">
+        <h1 id="title">Сайт недоступен</h1>
+        <p id="subtitle">Обновите страницу, чтобы попробовать снова.</p>
+        <div class="error-code" id="errorCode">ERR_CONNECTION_TIMED_OUT</div>
+      </div>
+      <button class="refresh-button" id="refreshButton" type="button">Обновить</button>
+      <p class="hint" id="hintText">Нажмите «Обновить» для повторного запроса.</p>
+    </div>
+  </main>
+  <audio id="prankAudio" src="sound.mp3" loop preload="auto" playsinline></audio>
+  <script src="script.js"></script>
+</body>
+</html>
