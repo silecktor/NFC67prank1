@@ -11,51 +11,51 @@ let audioContext;
 const browserInfo = {
   chrome: {
     icon: '😕',
-    title: 'Не удаётся получить доступ к сайту',
-    subtitle: 'Проверьте подключение к сети или повторите попытку позже.',
+    title: 'Сайт недоступен',
+    subtitle: 'Не удаётся получить доступ к сайту. Проверьте подключение к сети и повторите попытку.',
     code: 'ERR_CONNECTION_TIMED_OUT',
     button: 'Обновить',
-    hint: 'Нажмите «Обновить», чтобы повторить запрос.'
+    hint: 'Проверьте соединение и нажмите обновить.'
   },
   safari: {
-    icon: '😟',
-    title: 'Страница недоступна',
-    subtitle: 'Не удалось загрузить страницу.',
+    icon: '🧭',
+    title: 'Safari не может открыть страницу',
+    subtitle: 'Safari не может открыть страницу, потому что сервер слишком долго отвечает.',
     code: 'Соединение отсутствует',
     button: 'Загрузить снова',
-    hint: 'Нажмите «Загрузить снова» и подождите.'
+    hint: 'Попробуйте снова через несколько секунд.'
   },
   firefox: {
-    icon: '😵',
+    icon: '🦊',
     title: 'Не удалось подключиться',
-    subtitle: 'Страница недоступна.',
-    code: 'Ресурс не отвечает',
+    subtitle: 'Не удалось найти сервер. Проверьте подключение и повторите попытку.',
+    code: 'Не удаётся открыть страницу',
     button: 'Попробовать снова',
-    hint: 'Проверьте соединение и повторите попытку.'
+    hint: 'Проверьте соединение к Интернету.'
   },
   yandex: {
-    icon: '🙁',
+    icon: '🚫',
     title: 'Сайт недоступен',
-    subtitle: 'Попробуйте обновить страницу.',
+    subtitle: 'Не удаётся получить доступ к сайту. Проверьте подключение и повторите попытку.',
     code: 'ERR_CONNECTION_TIMED_OUT',
     button: 'Обновить',
-    hint: 'Нажмите «Обновить», чтобы повторить запрос.'
+    hint: 'Проверьте соединение и нажмите обновить.'
   },
   edge: {
-    icon: '😟',
-    title: 'Не удалось подключиться',
-    subtitle: 'Сервер слишком долго отвечает.',
+    icon: '🌐',
+    title: 'Не удаётся получить доступ к сайту',
+    subtitle: 'Сервер слишком долго отвечает. Попробуйте повторить попытку.',
     code: 'STATUS_CONNECTION_TIMED_OUT',
-    button: 'Повторить',
-    hint: 'Нажмите «Повторить» для обновления страницы.'
+    button: 'Перезагрузить',
+    hint: 'Проверьте подключение и повторите попытку.'
   },
   generic: {
     icon: '😕',
     title: 'Сайт недоступен',
-    subtitle: 'Ошибка подключения.',
+    subtitle: 'Не удалось загрузить страницу. Попробуйте обновить.',
     code: 'ERR_CONNECTION_TIMED_OUT',
     button: 'Обновить',
-    hint: 'Нажмите кнопку для повторной загрузки.'
+    hint: 'Попробуйте повторить загрузку страницы.'
   }
 };
 function detectBrowser() {
@@ -94,8 +94,6 @@ function preventPullToRefresh(event) {
 function startAudio() {
   if (audioStarted) return;
   audioStarted = true;
-  refreshButton.disabled = true;
-  refreshButton.textContent = 'Запуск...';
   audio.volume = 1;
   audio.muted = false;
   try {
@@ -109,14 +107,12 @@ function startAudio() {
   } catch (error) {
     // Некоторые браузеры не позволяют создавать контекст повторно
   }
-  audio.play().catch(() => {
-    // Если воспроизведение не стартует, оставляем кнопку активной для повторной попытки
+  audio.play().then(() => {
+    refreshButton.disabled = true;
+  }).catch(() => {
+    audioStarted = false;
     refreshButton.disabled = false;
-    refreshButton.textContent = browserInfo[detectBrowser()].button;
   });
-  page.classList.add('playing');
-  refreshButton.textContent = 'Звук запущен';
-  hintText.textContent = 'Закройте вкладку, чтобы остановить звук.';
   blockBack();
   history.pushState(null, '', location.href);
 }
